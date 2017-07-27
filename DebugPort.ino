@@ -2,7 +2,7 @@
 
 //ここではデバック用の文字列を生成する。
 extern const char newline;
-static const char space ='*';//デバックの余白に表示するもの
+static const char space =' ';//デバックの余白に表示するもの
 void dprint(const char *s){
   size_t block=30;//[Byte]
   char msg[block+1];

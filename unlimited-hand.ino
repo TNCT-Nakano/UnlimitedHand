@@ -1,17 +1,19 @@
 /*
-  Arduino sample code of UnlimitedHand 
-  for Unity, UnrealEngine and Processing, 
+  Arduino sample code of UnlimitedHand
+  for Unity, UnrealEngine and Processing,
   ver 0044
-  
+
   This code is used with:
   Arduino IDE ver 1.6.9 - 1.6.12 to upload this code to UnlimitedHand,
-  or an Unity Code "UH.cs" in UH_Unity004*.zip 
+  or an Unity Code "UH.cs" in UH_Unity004*.zip
   or an Processing Code in PUnlimitedHand0027.zip ~ PUnlimitedHand003*.zip
   or an UnrealEngine Project in UH4UE00**.zip
   Please visit http://dev.UnlimitedHand.com
 */
 #include <Kalman.h>
 #include <UH.h>
+#include "port.h"
+
 UH uh;
 
 /* Objects for EMS(Electric Mucsle Stimulation) */
@@ -30,26 +32,27 @@ float quaternionData[4];
 ///////////////////////////////////////////////////////////////////////////////
 //   SET UP
 ///////////////////////////////////////////////////////////////////////////////
-void setup() { 
+void setup() {
   delay(500);                     // time to start serial monitor
   Serial.begin(115200);           // Serial.println("UH Start");
-  
-  //according to docs this holds until serial is open, this does not appear to work
-  while (!Serial);  
 
-  uh.setupVibrationMotor();        // set up the Vibration Motor in UnlimitedHand 
+  //according to docs this holds until serial is open, this does not appear to work
+  while (!Serial);
+
+  uh.setupVibrationMotor();        // set up the Vibration Motor in UnlimitedHand
   uh.setupAcceleGyro();            // start the I2C connection for the Acceleration and the Gyro
-  
+
   uh.readRawAccelValues(accelRaw); // read the raw accelaration values for the Kalman setup
   uh.readRawGyroValues(gyroRaw);   // read the raw Gyro values for the Kalman setup
   uh.initAccelGyroKalman(micros(), accelRaw); // setup the Kalman
-  
-  uh.initEMS();                    // setup the EMS(Electric Muscle Stimulation) to output the haptic feeling 
+
+  uh.initEMS();                    // setup the EMS(Electric Muscle Stimulation) to output the haptic feeling
   currentVol = 12;                  // define the voltage of the EMS
-  
+
   uh.initPR();                     // setup the Photo-reflectors to detect hand movements.
-  
+
   //printHelp();                     // Please delete it, if you don't need the serial connection help
+  cmd_setup();
 }
 
 
@@ -58,7 +61,7 @@ void setup() {
 ///////////////////////////////////////////////////////////////////////////////
 void loop() {
   uh.updateEMS(); // you can choose also "updateEMS_POWERFUL();"
-  
+
   if(isHighSpeedMode){uh.checkXYZPR(); }
 }
 

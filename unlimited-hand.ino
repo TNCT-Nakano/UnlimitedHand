@@ -13,6 +13,7 @@
 #include <Kalman.h>
 #include <UH.h>
 #include "port.h"
+#include "BlueNinja.h"
 
 UH uh;
 
@@ -39,6 +40,8 @@ void setup() {
   //according to docs this holds until serial is open, this does not appear to work
   while (!Serial);
 
+  //blueNinja();
+  
   uh.setupVibrationMotor();        // set up the Vibration Motor in UnlimitedHand
   uh.setupAcceleGyro();            // start the I2C connection for the Acceleration and the Gyro
 

@@ -15,10 +15,14 @@ void help(int argc,char** argv){
 void dummy(int argc,char** argv){
   char buf[31];
   int rnd;
+  int data[6];
 
-  sprintf(buf,"%x",xorshift());
+  uh.readRawGyroValues(data);
+  uh.readRawAccelValues(data+3);
+  
+  sprintf(buf,"%x",data[0]);
   for (int i=1;i<6;i++){
-    sprintf(buf,"%s,%x",buf,xorshift());
+    sprintf(buf,"%s,%x",buf,data[i]);
   }
   strcat(buf,"\n");
   Serial.print(buf);

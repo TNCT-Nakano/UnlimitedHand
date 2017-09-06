@@ -1,28 +1,29 @@
 #include <SPI.h>
  
-#define SSPin 10
+#define SSPin 51
  
 void setup() {
-  Serial.begin (9600); 
+  Serial.begin (115200); 
   Serial.println("Master");
  
-  pinMode(SS,OUTPUT); //SSピンを出力設定
+  pinMode(MOSI,OUTPUT); //SSピンを出力設定
  
   SPI.setBitOrder(MSBFIRST);  //最上位ビット(MSB)から送信
   SPI.setClockDivider(SPI_CLOCK_DIV4);  //通信速度をデフォルト
   SPI.setDataMode(SPI_MODE2);   //アイドル5Vで0V→5Vの変化で送信する
+  
   SPI.begin();  //開始
 }
  
 void loop() {
-  char snd;
+  char snd = 'a';
   char rcv;
  
   //UARTから読み込み
-  snd = Serial.read();
+  //snd = Serial.read();
  
   //データがあれば送信
-  if(snd != -1){
+  //if(snd != -1){
  
     //このSlaveをセレクトする
     //（マスタ通信は有効です）
@@ -33,11 +34,11 @@ void loop() {
     delay(100);
  
     //受信
-    //rcv = SPI.transfer(0);
+    //rcv = SPI.transfer('a');
  
     //データ確認
     //Serial.println(rcv);
-  }
+  //}
 }
  
 /*

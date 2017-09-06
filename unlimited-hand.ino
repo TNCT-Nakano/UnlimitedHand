@@ -40,7 +40,7 @@ void setup() {
   //according to docs this holds until serial is open, this does not appear to work
   while (!Serial);
 
-  //blueNinja();
+  blueNinja();
   
   uh.setupVibrationMotor();        // set up the Vibration Motor in UnlimitedHand
   uh.setupAcceleGyro();            // start the I2C connection for the Acceleration and the Gyro

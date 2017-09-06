@@ -15,6 +15,8 @@ bool old;
 void setup() {
 
   pinMode(13,INPUT);
+
+  Serial.begin(115200);
  
   SPI.setBitOrder(MSBFIRST);  //最上位ビット(MSB)から送信
   SPI.setClockDivider(SPI_CLOCK_DIV4);
@@ -55,4 +57,3 @@ void loop() {
 void action(char sent){
   Serial.println(sent);
 }
-
